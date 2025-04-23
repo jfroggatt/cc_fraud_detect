@@ -32,8 +32,8 @@ Follow these steps to setup the project locally.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/jfroggatt/cc_fraud_detect.git
+cd cc_fraud_detect
 ```
 ### 2. Create a Virtual Environment (Optional but Recommended)
 ```bash
