@@ -125,11 +125,34 @@ The output of steps 1 through 6 can be reviewed in the `cc_fraud_detect.ipynb` n
 ### EDA Conclusion
 
 Based on the evaluation performed, the following was identified:
-- 186 features contain data for less than 50% of the transactions. Evaluating the correlation of those features to the IsFraud outcome, showed no significance for any of the features. As such, these features will be targeted for feature reduction.
-- There were no direct correlations of features identified that made it possible to target specific related features for additional reduction.
-- while the identity data was available for only 24% of the transactions, the additional features my provide additional value to the models.
-- standardized scaling of the dataset features only improved the results of the Logistic Regression Classifier. So, the dataset values will be used as is.
-- For categorical features, limiting each feature to the top 10 categories looked to provide a reasonable classification balance, while not overinflating the 'other' categories.
+
+#### Primary Difficulties
+- Between the Transaction and Identity datasets, there are 433 features to determine the single IsFraud label.
+  - This is a large number of features, which will preclude using some models or approaches 
+- 186 features contain data for less than 50% of the transactions.
+  - over 43% of the features are missing data for a significant portion of the transactions.
+  - This will affect decisions for using these attributes and imputing missing data.
+- Target label imbalance
+  - Of the 590,540 transactions, only 20,663 are labeled as isFraud = 1. This is just under 3.5%
+  - Having such a large imbalance on the isFraud is False will affect the meaning around evaluations of model accuracy
+- Identity data only available for 144,233 transactions (24.2%)
+ 
+#### Decisions
+- Features missing data for more than 50% of the transactions
+  - Evaluating the correlation of those features to the IsFraud outcome, showed no significance for any of the features. 
+  - As such, these features will be targeted for feature reduction.
+- Principal component analysis
+  - Reducing the feature set over iterations of 100, 200, and 400 showed no identified improvement with feature correlation. 
+  - No features identified for additional feature reduction.
+- Identity data
+  - while the identity data was available for only 24% of the transactions, the additional features my provide additional value to the models.
+  - identity data will be utilized for the model evaluation
+- Data set scaling
+  - standardized scaling of the dataset features only improved the results of the Logistic Regression Classifier. 
+  - The dataset values will be used as is and not scaled.
+- Categorical features
+  - review of the top 10 categories for each feature showed a reasonable classification balance, while not over inflating the 'other' categories.
+  - encoding of each categorical feature will utilize the top 10 categories by membership, with the remaining values in a single category.
 
 ## Feature Engineering
 
