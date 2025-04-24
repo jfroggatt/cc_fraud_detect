@@ -25,6 +25,8 @@ Since we have historical data and a known set of labels, we can focuses on a sup
 - [Next Steps](#next-steps)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
+- [Video Overview](#video-overview)
+
 ## Installation
 
 Follow these steps to setup the project locally.
@@ -105,7 +107,7 @@ Categorical Features:
 
 ### Data Details
 
-The `train_transaction.csv` dataset consists of 590,540 historical credit card transactions, with the target label 'isFraud', and 393 features. ProductCD, card4, card6, P_emaildomain, R_emaildomain, and M1-9 are nominal data types. The remaining 4XX features are numerical, with most containing low order integer or binary values.
+The `train_transaction.csv` dataset consists of 590,540 historical credit card transactions, with the target label 'isFraud', and 393 features. ProductCD, card4, card6, P_emaildomain, R_emaildomain, and M1-9 are nominal data types. The remaining 369 features are numerical, with most containing low order integer or binary values.
 
 The `train_identity.csv` dataset consists of 144,233 transactions with 40 identity related features. The link between the transaction and idenitity files is the TransactionID attribute. The features are a mixture of numerical and nominal features.
 ## Exploratory Data Analysis
@@ -147,9 +149,6 @@ Based on the evaluation performed, the following was identified:
 - Identity data
   - while the identity data was available for only 24% of the transactions, the additional features my provide additional value to the models.
   - identity data will be utilized for the model evaluation
-- Data set scaling
-  - standardized scaling of the dataset features only improved the results of the Logistic Regression Classifier. 
-  - The dataset values will be used as is and not scaled.
 - Categorical features
   - review of the top 10 categories for each feature showed a reasonable classification balance, while not over inflating the 'other' categories.
   - encoding of each categorical feature will utilize the top 10 categories by membership, with the remaining values in a single category.
@@ -187,10 +186,10 @@ For one aspect of the model evaluations, the features will be scaled to determin
 For the modeling, we will use evaluate multiple models to determine which provides the best accuracy. Once the best model has been identified, we will then examine tuning performance to achieve the highest accuracy for that model. 
 
 The models that will be evaluated for this dataset:
-1. Logistic Regression
-2. Decision Tree
-3. Random Forest
-4. LightGBM (mention in lecture but not covered in course)
+1. Logistic Regression Classifier
+2. Decision Tree Classifier
+3. Random Forest Classifier
+4. LightGBM Classifier (mention in lecture but not covered in course)
 
 I decided not to use AdaBoost, Gradient Boost, or SVM (other models covered in lectures), because the performance is a problem with such a high number of parameters and observations, where the models selected would work better.
 
@@ -226,10 +225,10 @@ At this point, the results would be presented to the business to determine if th
 ### Prediction Results
 
 The result from the final LightGBM Classifier model was:
-- True Negatives = 113,810 : transactions correctly classified as Not Fraud
-- True Positives = 2,225 : transactions correctly classified as Fraud
-- False Positives = 165 : valid transactions misclassified as Fraud (0.14% of valid transactions = good customer experience overall)
-- False Negatives = 1,908 : fraud transactions misclassified as Not Fraud (46.17%)
+- True Negatives = 113,820 : transactions correctly classified as Not Fraud
+- True Positives = 2,203 : transactions correctly classified as Fraud
+- False Positives = 155 : valid transactions misclassified as Fraud (0.14% of valid transactions = good customer experience overall)
+- False Negatives = 1,930 : fraud transactions misclassified as Not Fraud (46.7%)
 
 
 ## Next Steps
@@ -265,3 +264,6 @@ This project is licensed under the [MIT](https://choosealicense.com/licenses/mit
     -  provided some starting parameters for evaluating LightGBM
  - [readme.so Editor](https://readme.so/editor)
     -  a handy online README.md editor by [Katherine Oelsner](https://www.katherineoelsner.com/)
+
+## Video Overview
+A video overview of the project can be accessed on YouTube: [CSCA-5622 Final Project](https://youtu.be/ZtnP777eYj8)
